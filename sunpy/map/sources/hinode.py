@@ -8,6 +8,7 @@ __email__ = "jack.ireland@nasa.gov"
 import numpy as np
 from sunpy.map import GenericMap
 from sunpy.cm import cm
+import matplotlib.pyplot as plt
 
 __all__ = ['XRTMap', 'SOTMap']
 
@@ -65,7 +66,9 @@ class XRTMap(GenericMap):
         self.meta['detector'] = "XRT"
 #        self.meta['instrume'] = "XRT"
         self.meta['telescop'] = "Hinode"
-        self.plot_settings['cmap'] = cm.get_cmap(name='hinodexrt')
+        # hgln_obs is not present in the meta data and won't be, this prevents useless warning
+        self.meta['hgln_obs'] = 0.0
+        self.plot_settings['cmap'] = plt.get_cmap(name='hinodexrt')
 
     @property
     def measurement(self):
